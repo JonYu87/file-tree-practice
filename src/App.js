@@ -1,39 +1,56 @@
-import React from 'react'
-import {useState} from 'react'
+import React, { useState } from "react";
 
 function App() {
-  return <div>
-    <Folder name="Desktop">
-      <Folder name="Music">
-        <File name="song.mp3" />
+  return (
+    <div>
+      <Folder name="Desktop">
+        <Folder name="Music">
+          <File name="song.mp4" />
+          <File name="song.mp4" />
+        </Folder>
+        <File name="dogs.jpeg" />
+        <File name="cats.png" />
       </Folder>
-      <File name="dogs.jpeg"/>
-      <File name="cats.png"/> 
-    </Folder>
-    <Folder name="Applications"/>
-  </div>
+      <Folder name="Applications" />
+    </div>
+  );
 }
 
 const Folder = (props) => {
-  const {name, children} = props;
+  const { name, children } = props;
   const [isOpen, setIsOpen] = useState(false);
 
-  const handleClick = () => {
-    setIsOpen(!isOpen);
-  }
+  // const handleClick = () => {
+  //   setIsOpen(!isOpen);
+  // }
 
-  return <div onClick={handleClick}>
-    {name}
-    <div style={{ marginLeft: '17px'}}>
-      { isOpen ? children : null }
+  return (
+    <div>
+      <span onClick={() => setIsOpen(!isOpen)}>
+        <i
+          className={isOpen ? "blue folder open icon" : "blue folder icon"}
+        ></i>
+        <i className={isOpen ? "caret down icon" : "caret right icon"}></i>
+      </span>
+      {name}
+      <div style={{ marginLeft: "17px" }}>{isOpen ? children : null}</div>
     </div>
-  </div>
-}
+  );
+};
 
 const File = (props) => {
-  return <div>{props.name}</div>
-}
-
-
+  const { name } = props;
+  const fileExtension = name.split(".")[1];
+  const fileIcon = {
+    mp4: "headphones",
+    jpeg: "file image",
+    png: "file image outline",
+  }
+  
+  return <div>
+      <i className={`${fileIcon[fileExtension]} icon`}></i>
+      {name}
+    </div>
+};
 
 export default App;
