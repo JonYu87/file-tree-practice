@@ -8,10 +8,15 @@ function App() {
           <File name="song.mp4" />
           <File name="song.mp4" />
         </Folder>
-        <File name="dogs.jpeg" />
-        <File name="cats.png" />
+        <Folder name="Pictures">
+          <File name="dogs.jpeg" />
+          <File name="cats.png" />
+        </Folder>
       </Folder>
-      <Folder name="Applications" />
+      <Folder name="Applications">
+        <File name="chrome.exe" />
+        <File name="firefox.exe" />
+      </Folder>
     </div>
   );
 }
@@ -45,12 +50,15 @@ const File = (props) => {
     mp4: "headphones",
     jpeg: "file image",
     png: "file image outline",
-  }
-  
-  return <div>
+    exe: "rss square",
+  };
+
+  return (
+    <div>
       <i className={`${fileIcon[fileExtension]} icon`}></i>
       {name}
     </div>
+  );
 };
 
 export default App;
